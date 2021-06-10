@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class UI : MonoBehaviour
+public class UI:MonoBehaviour
 {
 
     public GameObject pausemenu;
@@ -14,7 +16,7 @@ public class UI : MonoBehaviour
 
     public int scoreAmount = 0;
 
-    public  TMP_Text scoreAmountText;
+    //public  TMP_Text scoreAmountText;
 
     public GameObject[] levels;
 
@@ -55,7 +57,7 @@ public class UI : MonoBehaviour
     private void restoreValues()
     {
         scoreAmount = 0;
-        scoreAmountText.text = scoreAmount.ToString();
+        //scoreAmountText.text = scoreAmount.ToString();
     }
 
     public void restartCurrentLevel()

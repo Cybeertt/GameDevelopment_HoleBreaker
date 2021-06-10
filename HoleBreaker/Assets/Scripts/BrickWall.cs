@@ -27,12 +27,12 @@ public class BrickWall : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider other){
+    /*void OnTriggerEnter(Collider other){
         Bricks bricks;
         if(other.CompareTag("Bricks") ||
             other.TryGetComponent<Bricks>(out bricks))
         {
             isActivated = true;
         }
-    }
+    }*/
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildWall : MonoBehaviour
 {
-    private bool isActivated = false;
+    /*private bool isActivated = false;
     private bool fullyPressed = false;
     private float timer = 0;
 
@@ -15,7 +15,6 @@ public class BuildWall : MonoBehaviour
     void Start()
     {
         ui = GameObject.Find("UI").gameObject.GetComponent<UI>() ;
-        originalPosition = button.localPosition;
 
         particleSystem = GetComponent<ParticleSystem>();
     }
@@ -48,5 +47,5 @@ public class BuildWall : MonoBehaviour
         {
             isActivated = true;
         }
-    }
+    }*/
 }
