@@ -40,15 +40,6 @@ public class BuildingSystem : MonoBehaviour
         if (Input.GetKeyDown("e"))
         {
             buildModeOn = !buildModeOn;
-
-            if (buildModeOn)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
         }
 
         if (Input.GetKeyDown("r"))
@@ -57,42 +48,54 @@ public class BuildingSystem : MonoBehaviour
             if (blockSelectCounter >= bSys.allBlocks.Count) blockSelectCounter = 0;
         }
 
-        if (buildModeOn)
+        if (Input.GetMouseButtonDown(1))
         {
-            RaycastHit buildPosHit;
-
-            if (Physics.Raycast(playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out buildPosHit, 10, buildableSurfacesLayer))
+            RaycastHit destroyPos;
+            if (Physics.Raycast(playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out destroyPos, 10, buildableSurfacesLayer))
             {
-                Vector3 point = buildPosHit.point;
-                buildPos = new Vector3(Mathf.Round(point.x), Mathf.Round(point.y), Mathf.Round(point.z));
-                canBuild = true;
+                if (destroyPos.collider.gameObject.layer == 8)
+                {
+                    Destroy(destroyPos.collider.gameObject);
+                }
             }
-            else
+        } else 
+        {
+            if (buildModeOn)
+            {
+                RaycastHit buildPosHit;
+                if (Physics.Raycast(playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out buildPosHit, 10, buildableSurfacesLayer))
+                {
+                    Vector3 point = buildPosHit.point;
+                    buildPos = new Vector3(Mathf.Round(point.x), Mathf.Round(point.y), Mathf.Round(point.z));
+                    canBuild = true;
+                }
+                else
+                {
+                    Destroy(currentTemplateBlock.gameObject);
+                    canBuild = false;
+                }
+            }
+
+            if (!buildModeOn && currentTemplateBlock != null)
             {
                 Destroy(currentTemplateBlock.gameObject);
                 canBuild = false;
             }
-        }
 
-        if (!buildModeOn && currentTemplateBlock != null)
-        {
-            Destroy(currentTemplateBlock.gameObject);
-            canBuild = false;
-        }
-
-        if (canBuild && currentTemplateBlock == null)
-        {
-            currentTemplateBlock = Instantiate(blockTemplatePrefab, buildPos, Quaternion.identity);
-            currentTemplateBlock.GetComponent<MeshRenderer>().material = templateMaterial;
-        }
-
-        if (canBuild && currentTemplateBlock != null)
-        {
-            currentTemplateBlock.transform.position = buildPos;
-
-            if (Input.GetMouseButtonDown(0))
+            if (canBuild && currentTemplateBlock == null)
             {
-                PlaceBlock();
+                currentTemplateBlock = Instantiate(blockTemplatePrefab, buildPos, Quaternion.identity);
+                currentTemplateBlock.GetComponent<MeshRenderer>().material = templateMaterial;
+            }
+
+            if (canBuild && currentTemplateBlock != null)
+            {
+                currentTemplateBlock.transform.position = buildPos;
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    PlaceBlock();
+                }                
             }
         }
     }
@@ -103,5 +106,14 @@ public class BuildingSystem : MonoBehaviour
         Block tempBlock = bSys.allBlocks[blockSelectCounter];
         newBlock.name = tempBlock.blockName + "-Block";
         newBlock.GetComponent<MeshRenderer>().material = tempBlock.blockMaterial;
+    }
+
+    private void DestroyBlock(Vector3 point) 
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(buildPos, 1f);
+        foreach (var hitCollider in hitColliders)
+        {
+            hitCollider.SendMessage("Destroy");
+        }
     }
 }
