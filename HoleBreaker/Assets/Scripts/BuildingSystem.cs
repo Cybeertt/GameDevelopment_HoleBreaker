@@ -28,13 +28,10 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField]
     private Material templateMaterial;
 
-    private int blockSelectCounter = 0;
-
-    //private KeyConfig key= GetComponent<KeyConfig>();
-
     private void Start()
     {
         bSys = GetComponent<BlockSystem>();
+        currentTemplateBlock = Instantiate(blockTemplatePrefab, new Vector3(-10, -1000, -10), Quaternion.identity);
     }
 
     private void Update()
@@ -42,12 +39,6 @@ public class BuildingSystem : MonoBehaviour
         if (Input.GetKeyDown("e"))
         {
             buildModeOn = !buildModeOn;
-        }
-
-        if (Input.GetKeyDown("r"))
-        {
-            blockSelectCounter++;
-            if (blockSelectCounter >= bSys.allBlocks.Count) blockSelectCounter = 0;
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -60,44 +51,47 @@ public class BuildingSystem : MonoBehaviour
                     Destroy(destroyPos.collider.gameObject);
                 }
             }
-        } else 
+        } else if (buildModeOn)
         {
-            if (buildModeOn)
+            RaycastHit buildPosHit;
+
+            if (Physics.Raycast(playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out buildPosHit, 10, buildableSurfacesLayer))
             {
-                RaycastHit buildPosHit;
-                if (Physics.Raycast(playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out buildPosHit, 10, buildableSurfacesLayer))
-                {
-                    Vector3 point = buildPosHit.point;
-                    buildPos = new Vector3(Mathf.Round(point.x), Mathf.Round(point.y), Mathf.Round(point.z));
-                    canBuild = true;
-                }
-                else
-                {
+                Vector3 point = buildPosHit.point;
+                buildPos = new Vector3(Mathf.Round(point.x), Mathf.Round(point.y), Mathf.Round(point.z));
+                canBuild = true;
+
+                if (point.x <= 1.5 || point.x >= 2.5) {
                     Destroy(currentTemplateBlock.gameObject);
                     canBuild = false;
                 }
             }
-
-            if (!buildModeOn && currentTemplateBlock != null)
+            else
             {
                 Destroy(currentTemplateBlock.gameObject);
                 canBuild = false;
             }
+        }
 
-            if (canBuild && currentTemplateBlock == null)
+        if (!buildModeOn && currentTemplateBlock != null)
+        {
+            Destroy(currentTemplateBlock.gameObject);
+            canBuild = false;
+        }
+
+        if (canBuild && currentTemplateBlock == null)
+        {
+            currentTemplateBlock = Instantiate(blockTemplatePrefab, buildPos, Quaternion.identity);
+            currentTemplateBlock.GetComponent<MeshRenderer>().material = templateMaterial;
+        }
+
+        if (canBuild && currentTemplateBlock != null)
+        {
+            currentTemplateBlock.transform.position = buildPos;
+
+            if (Input.GetMouseButtonDown(0))
             {
-                currentTemplateBlock = Instantiate(blockTemplatePrefab, buildPos, Quaternion.identity);
-                currentTemplateBlock.GetComponent<MeshRenderer>().material = templateMaterial;
-            }
-
-            if (canBuild && currentTemplateBlock != null)
-            {
-                currentTemplateBlock.transform.position = buildPos;
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    PlaceBlock();
-                }                
+                PlaceBlock();
             }
         }
     }
@@ -105,11 +99,11 @@ public class BuildingSystem : MonoBehaviour
     private void PlaceBlock()
     {
         GameObject newBlock = Instantiate(blockPrefab, buildPos, Quaternion.identity);
-        Block tempBlock = bSys.allBlocks[blockSelectCounter];
+        Block tempBlock = bSys.allBlocks[0];
         newBlock.name = tempBlock.blockName + "-Block";
         newBlock.GetComponent<MeshRenderer>().material = tempBlock.blockMaterial;
     }
-
+    
     private void DestroyBlock(Vector3 point) 
     {
         Collider[] hitColliders = Physics.OverlapSphere(buildPos, 1f);
