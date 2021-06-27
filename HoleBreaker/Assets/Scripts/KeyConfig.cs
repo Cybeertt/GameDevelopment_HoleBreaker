@@ -14,6 +14,12 @@ public class KeyConfig : MonoBehaviour
     private Color32 normal = new Color32(39, 171, 249, 255);
     private Color32 selected = new Color32(239, 116, 36, 255);
 
+    KeyCode[] mouseKeys;
+    void Awake()
+    {
+        mouseKeys = new KeyCode[] { KeyCode.Mouse0, KeyCode.Mouse1, KeyCode.Mouse2, KeyCode.Mouse3, KeyCode.Mouse4, KeyCode.Mouse5, KeyCode.Mouse6 };
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,7 +93,20 @@ public class KeyConfig : MonoBehaviour
                 currentKey.transform.GetChild(0).GetComponent<Text>().text = e.keyCode.ToString();
                 currentKey.GetComponent<Image>().color = normal;
                 currentKey = null;
-            }
+            } 
+            if (e.isMouse)
+            {
+                for (int i = 0; i < mouseKeys.Length; ++i)
+                {
+                    if (Input.GetKeyDown(mouseKeys[i]))
+                    {
+                        keys[currentKey.name] = mouseKeys[i];
+                        currentKey.transform.GetChild(0).GetComponent<Text>().text = mouseKeys[i].ToString();
+                        currentKey.GetComponent<Image>().color = normal;
+                        currentKey = null;
+                    }
+                }
+            } 
         }
     }
 

@@ -8,10 +8,17 @@ public class CameraController : MonoBehaviour
     public Transform playerBody;
     private float xRotation = 0f;
 
+    public GameObject slider;
+
+    private void ChangeMouseSensitivity(float X){
+        mouseSensitivity = X;
+    }
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Camera.main.fieldOfView = 90;
+        Camera.main.fieldOfView = 90;   
+        slider.SetActive(true);
     }
 
     void Update()
@@ -26,4 +33,5 @@ public class CameraController : MonoBehaviour
 
         playerBody.Rotate(Vector3.up * mouseX);
     }
+
 }

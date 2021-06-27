@@ -27,7 +27,7 @@ public class UI:MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        changeLevel(2);
     }
 
     // Update is called once per frame
@@ -37,6 +37,7 @@ public class UI:MonoBehaviour
         {
             if(activename == false) {
                 pausemenu.SetActive(true);
+                
             } else {
                 pausemenu.SetActive(false);
             }

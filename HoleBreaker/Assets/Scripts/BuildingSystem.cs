@@ -30,6 +30,8 @@ public class BuildingSystem : MonoBehaviour
 
     private int blockSelectCounter = 0;
 
+    //private KeyConfig key= GetComponent<KeyConfig>();
+
     private void Start()
     {
         bSys = GetComponent<BlockSystem>();
