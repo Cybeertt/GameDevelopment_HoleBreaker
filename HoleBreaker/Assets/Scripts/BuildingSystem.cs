@@ -28,6 +28,8 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField]
     private Material templateMaterial;
 
+    public GameObject placedBlocks;
+
     private void Start()
     {
         bSys = GetComponent<BlockSystem>();
@@ -99,6 +101,7 @@ public class BuildingSystem : MonoBehaviour
     private void PlaceBlock()
     {
         GameObject newBlock = Instantiate(blockPrefab, buildPos, Quaternion.identity);
+        newBlock.transform.parent = placedBlocks.transform;
         Block tempBlock = bSys.allBlocks[0];
         newBlock.name = tempBlock.blockName + "-Block";
         newBlock.GetComponent<MeshRenderer>().material = tempBlock.blockMaterial;
