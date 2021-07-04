@@ -2009,6 +2009,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: First Person Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1906869701864544597, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
+      propertyPath: m_Height
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906869701864544597, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1906869701864544618, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2055,7 +2063,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1906869702922350571, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.92
+      value: 0.506
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906869702922350571, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.70047045
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906869702922350571, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906869702922350571, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7136814
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906869702922350571, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906869702922350571, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 9091.07
       objectReference: {fileID: 0}
     - target: {fileID: 1906869703796969147, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
       propertyPath: m_LocalScale.x
@@ -2071,7 +2099,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1906869703796969147, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.46
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1906869701864544619, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
@@ -3679,6 +3707,7 @@ MonoBehaviour:
   placedBlocks: {fileID: 1300933135}
   filledBlocks: {fileID: 1118950900}
   filledBlockPrefab: {fileID: 3895229301281237306, guid: 9c06f4c69d14cda47a287aa996a29dcc, type: 3}
+  wallPrefab: {fileID: 1657282385548385126, guid: e9da8bebd3b4018489d7e7dc98cf2aa9, type: 3}
   filledEmptyBlockPrefab: {fileID: 3895229301281237306, guid: 4c0b775874f7fd249af904f0732a611e, type: 3}
   bSys: {fileID: 4304576724392233582}
 --- !u!4 &1697419137

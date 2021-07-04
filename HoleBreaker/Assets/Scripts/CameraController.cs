@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         Camera.main.fieldOfView = 90;   
         slider.SetActive(true);
     }

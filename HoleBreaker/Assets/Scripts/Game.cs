@@ -8,6 +8,8 @@ public class Game : MonoBehaviour
     public GameObject placedBlocks;
     public GameObject filledBlocks;
     public GameObject filledBlockPrefab;
+
+    public GameObject wallPrefab;
     public GameObject filledEmptyBlockPrefab;
     
     public BlockSystem bSys;
@@ -16,13 +18,12 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        generateWall(10);
+        generateWall(6);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         if (Input.GetKeyDown("r")) {
             generateWall(10);
         }
@@ -32,14 +33,15 @@ public class Game : MonoBehaviour
         foreach (Transform child in placedBlocks.transform) {
                 GameObject.Destroy(child.gameObject);
         }
-        filledBlocks.transform.DetachChildren();
     }
 
     private void clearWall() {
-        foreach (Transform child in filledBlocks.transform) {
-                GameObject.Destroy(child.gameObject);
+        for(int i = filledBlocks.transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = filledBlocks.transform.GetChild(i);
+            GameObject.Destroy(child.gameObject);
+            // do whatever you want
         }
-        filledBlocks.transform.DetachChildren();
     }
 
     private void PlaceBlock(Vector3 position)
@@ -51,37 +53,23 @@ public class Game : MonoBehaviour
         newBlock.GetComponent<MeshRenderer>().material = tempBlock.blockMaterial;
     }
 
-    private void PlaceEmptyBlock(Vector3 position)
-    {
-        GameObject newBlock = Instantiate(filledEmptyBlockPrefab, position, Quaternion.identity);
-        newBlock.transform.parent = filledBlocks.transform;
-        Block tempBlock = bSys.allBlocks[2];
-        newBlock.name = tempBlock.blockName + "-Block";
-        newBlock.GetComponent<MeshRenderer>().material = tempBlock.blockMaterial;
-    }
-
-    bool checkBlock(Vector3 p, int n) {
-        for (int i = 0; i < n; i++) {
-            if (unfilledBlocks[i].x == p.x && unfilledBlocks[i].y == p.y && unfilledBlocks[i].z == p.z) {
-                return true;
+    private void makeHoles(int iterations, int n) {
+        int count = 0;
+        int i = 0;
+        while (i < iterations && count != n) {
+            foreach (Transform t in filledBlocks.transform) {
+                if (UnityEngine.Random.Range(1, 6) == 1) {
+                    DestroyImmediate(t.gameObject);
+                    count++;
+                } 
+                if (count == n) break;
             }
+            iterations++;
         }
-        return false;
     }
 
-
-    //17, 1, 3
-    /**
-    Generates a random 7x4 wall given n holes to fill
-    Has a left sided bias
-    */
-    public void generateWall(int n) {
-        if (filledBlocks.transform.childCount > 0) 
-        {
-            clearWall();
-            clearPlayerWall();
-        }
-
+    //auxiliary method to generate 
+    private void drawWall(int n) {
         unfilledBlocks = new Vector3[n];
         
         Vector3 wallStartPosition = filledBlocks.transform.position;
@@ -96,21 +84,24 @@ public class Game : MonoBehaviour
                 PlaceBlock(p); 
             }    
         }
+    }
 
-        //Delete n random blocks
-        //Stops at 10000 tries just in case
-        int count = 0;
-        int iterations = 0;
-        while (iterations < 10000 && count != n) {
-            foreach (Transform t in filledBlocks.transform) {
-                if (UnityEngine.Random.Range(1, 6) == 1) {
-                    DestroyImmediate(t.gameObject);
-                    count++;
-
-                } 
-            }
-            iterations++;
+    //17, 1, 3
+    /**
+    Generates a random 7x4 wall given n holes to fill
+    Has a left sided bias
+    */
+    public void generateWall(int n) {
+        if (filledBlocks.transform.childCount > 0) 
+        {
+            Destroy(filledBlocks);
+            clearPlayerWall();
         }
         
+        GameObject wall = Instantiate(wallPrefab, wallPrefab.transform.position, Quaternion.identity);
+        filledBlocks = wall;
+        //Delete n random blocks
+        //Stops at 10000 tries just in case
+        makeHoles(10000, n);        
     }
 }
