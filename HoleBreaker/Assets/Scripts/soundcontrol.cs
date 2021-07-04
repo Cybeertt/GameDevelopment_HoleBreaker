@@ -13,10 +13,16 @@ public class soundcontrol : MonoBehaviour
 	public float backgroundFloat, soundEffectsFloat;
 	public AudioSource backgroundAudio;
 	public AudioSource[] soundEffectsAudio;
+	public AudioClip AudioClip1;
+    public AudioClip AudioClip2;
 	
     // Start is called before the first frame update
     void Start()
     {
+		backgroundAudio.clip = AudioClip1;
+
+		backgroundAudio.Play();
+
         FirstPlayInt = PlayerPrefs.GetInt(FirstPlay);
 		
 		if(FirstPlayInt == 0)
@@ -61,6 +67,30 @@ public class soundcontrol : MonoBehaviour
 		{
 			soundEffectsAudio[i].volume = soundEffectsSlider.value;
 		}
+	}
+
+	public void ChangeMusic() 
+	{
+		if (backgroundAudio)
+		{
+
+			backgroundAudio.clip = AudioClip2;
+
+			backgroundAudio.Play();
+
+		} 
+	}
+
+	public void ChangeMusic2() 
+	{
+		if (backgroundAudio.clip == AudioClip2)
+		{
+
+			backgroundAudio.clip = AudioClip1;
+
+			backgroundAudio.Play();
+
+		} 
 	}
 	
 }

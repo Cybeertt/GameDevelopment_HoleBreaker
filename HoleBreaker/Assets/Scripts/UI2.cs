@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using System;
 
-public class UI:MonoBehaviour
+public class UI2 : MonoBehaviour
 {
 
     public GameObject pausemenu;
@@ -12,14 +12,6 @@ public class UI:MonoBehaviour
     public GameObject points;
     public bool activegame;
     public bool pause;
-
-    public GameObject victory;
-    public GameObject instruct;
-    public GameObject instruct2;
-
-    public int scoreAmount = 0;
-
-    //public  TMP_Text scoreAmountText;
 
     public GameObject[] levels;
 
@@ -36,26 +28,24 @@ public class UI:MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+       if(Input.GetKeyDown(KeyCode.P))
         {
             if(activegame)
             {
                 ResumeGame();
-                
             } 
             else 
             {
-                Cursor.lockState = CursorLockMode.None;
                 activegame = true;
                 pause = true;
-                instruct.SetActive(false);
+                points.SetActive(false);
                 pausemenu.SetActive(true);
                 Time.timeScale = 0f;   
                 Cursor.visible = true;
             }
         }  
 
-        if(Input.GetKey(KeyCode.T)){
+        if(Input.GetKey(KeyCode.R)){
             restartCurrentLevel();
         }
     }
@@ -63,13 +53,11 @@ public class UI:MonoBehaviour
     public void ResumeGame()
     {
         activegame = false;
-        instruct.SetActive(true);
+        pause = false;
+        points.SetActive(true);
         pausemenu.SetActive(false);
         Time.timeScale = 1f;
-        Cursor.visible = false;
-        activelock();
     }
-
 
     public void changeLevel(int levelId)
     {
@@ -81,7 +69,6 @@ public class UI:MonoBehaviour
         currentLevelId = levelId;
     }
 
-
     public void restartCurrentLevel()
     {
         if(currentLevel != null)
@@ -89,46 +76,16 @@ public class UI:MonoBehaviour
             Destroy(currentLevel);
             currentLevel = Instantiate(levels[currentLevelId], transform.parent);
         }
-        
     }
 
-    public void destroyCurrentLevel()
-    {
-        if(currentLevel != null)
-        {
-            Destroy(currentLevel);
-        }
-    }
-
-    public void OptionsPauseMenu()
+    public void keybindingPauseMenu()
     {
         if(pause)
         {
             pausemenu.SetActive(true);
         } else {
-            mainmenu.SetActive(true);
+
         }
     }
 
-    public void StopSound() 
-    {
-        instruct.SetActive(false);
-        instruct2.SetActive(false);
-    }
-
-    public void ShowVictory()
-    {
-        victory.SetActive(true);
-        //NextLevel();
-    }
-
-    public void activelock()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 }

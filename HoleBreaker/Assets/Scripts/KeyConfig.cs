@@ -7,7 +7,7 @@ public class KeyConfig : MonoBehaviour
 {
     private Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>();
 
-    public Text up, left, down, right, jump, build, destroy;
+    public Text build, destroy;
 
     private GameObject currentKey;
 
@@ -23,19 +23,9 @@ public class KeyConfig : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        keys.Add("Up", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Up", "W")));
-        keys.Add("Down", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Down", "S")));
-        keys.Add("Left", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Left", "A")));
-        keys.Add("Right", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Right", "D")));
-        keys.Add("Jump", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump", "Space")));
         keys.Add("Build", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Build", "Mouse0")));
         keys.Add("Destroy", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Destroy", "Mouse1")));
-        
-        up.text = keys["Up"].ToString();
-        down.text = keys["Down"].ToString();
-        left.text = keys["Left"].ToString();
-        right.text = keys["Right"].ToString();
-        jump.text = keys["Jump"].ToString();
+
         build.text = keys["Build"].ToString();
         destroy.text = keys["Destroy"].ToString();
     }
