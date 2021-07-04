@@ -9,16 +9,15 @@ public class Game : MonoBehaviour
     public GameObject filledBlocks;
     public GameObject filledBlockPrefab;
 
-    public GameObject wallPrefab;
-    public GameObject filledEmptyBlockPrefab;
-    
+    public GameObject wallPrefab;    
     public BlockSystem bSys;
-
     private Vector3[] unfilledBlocks;
+
+    public GameObject outerWall;
     // Start is called before the first frame update
     void Start()
     {
-        generateWall(6);
+        generateWall(10);
     }
 
     // Update is called once per frame
@@ -35,6 +34,7 @@ public class Game : MonoBehaviour
         }
     }
 
+    //deprecated
     private void clearWall() {
         for(int i = filledBlocks.transform.childCount - 1; i >= 0; i--)
         {
@@ -68,7 +68,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    //auxiliary method to generate 
+    //auxiliary method to generate walls to then make them into prefabs
     private void drawWall(int n) {
         unfilledBlocks = new Vector3[n];
         
@@ -92,14 +92,13 @@ public class Game : MonoBehaviour
     Has a left sided bias
     */
     public void generateWall(int n) {
-        if (filledBlocks.transform.childCount > 0) 
-        {
-            Destroy(filledBlocks);
-            clearPlayerWall();
-        }
+        GameObject wall = Instantiate(wallPrefab, filledBlocks.transform.position, filledBlocks.transform.rotation);
+        Destroy(filledBlocks);
+        clearPlayerWall();
         
-        GameObject wall = Instantiate(wallPrefab, wallPrefab.transform.position, Quaternion.identity);
         filledBlocks = wall;
+        filledBlocks.transform.SetParent(outerWall.transform);
+
         //Delete n random blocks
         //Stops at 10000 tries just in case
         makeHoles(10000, n);        

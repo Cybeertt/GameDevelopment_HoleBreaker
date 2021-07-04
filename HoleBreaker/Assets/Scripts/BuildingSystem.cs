@@ -29,11 +29,23 @@ public class BuildingSystem : MonoBehaviour
     private Material templateMaterial;
 
     public GameObject placedBlocks;
+    public Transform start, end;
+    private Vector3 startPosition, endPosition;
 
     private void Start()
     {
         bSys = GetComponent<BlockSystem>();
         currentTemplateBlock = Instantiate(blockTemplatePrefab, new Vector3(-10, -1000, -10), Quaternion.identity);
+        startPosition = start.position;
+        endPosition = end.position;
+    }
+
+    private bool isOutsideOfArea(Vector3 lookPos) {
+        if (lookPos.x <= startPosition.x || lookPos.y <= startPosition.y || lookPos.z >= startPosition.z
+        || lookPos.x >= endPosition.x || lookPos.y >= endPosition.y || lookPos.z <= endPosition.z)
+            return true;
+
+        return false;
     }
 
     private void Update()
@@ -63,7 +75,8 @@ public class BuildingSystem : MonoBehaviour
                 buildPos = new Vector3(Mathf.Round(point.x), Mathf.Round(point.y), Mathf.Round(point.z));
                 canBuild = true;
 
-                if (point.x <= 1.5 || point.x >= 2.5) {
+                //Isto é mesmo a melhor maneira de fazer isto??? Parece um pouco à bruta
+                if (isOutsideOfArea(point)) {
                     Destroy(currentTemplateBlock.gameObject);
                     canBuild = false;
                 }
