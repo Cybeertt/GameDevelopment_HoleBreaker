@@ -32,6 +32,8 @@ public class BuildingSystem : MonoBehaviour
     public Transform start, end;
     private Vector3 startPosition, endPosition;
 
+    private float timePassed = 0f;
+
     private void Start()
     {
         bSys = GetComponent<BlockSystem>();
@@ -50,15 +52,17 @@ public class BuildingSystem : MonoBehaviour
 
     private void Update()
     {
+        timePassed += Time.deltaTime;
         if (Input.GetKeyDown("e"))
         {
             buildModeOn = !buildModeOn;
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(1) && timePassed >= 0.065f)
         {
+            timePassed = 0f;
             RaycastHit destroyPos;
-            if (Physics.Raycast(playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out destroyPos, 10, buildableSurfacesLayer))
+            if (Physics.Raycast(playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out destroyPos, 5, buildableSurfacesLayer))
             {
                 if (destroyPos.collider.gameObject.layer == 8)
                 {
@@ -69,7 +73,7 @@ public class BuildingSystem : MonoBehaviour
         {
             RaycastHit buildPosHit;
 
-            if (Physics.Raycast(playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out buildPosHit, 10, buildableSurfacesLayer))
+            if (Physics.Raycast(playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out buildPosHit, 5, buildableSurfacesLayer))
             {
                 Vector3 point = buildPosHit.point;
                 buildPos = new Vector3(Mathf.Round(point.x), Mathf.Round(point.y), Mathf.Round(point.z));
