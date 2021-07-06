@@ -15,9 +15,9 @@ public class CameraController : MonoBehaviour
     //public float realZoom;
     private static readonly string MousePref = "MousePref";
     private static readonly string FirstPlay = "FirstPlay";
-	private static readonly string ZoomPref = "ZoomPref";
-    public Slider zoomslider;
-    public float zoomfloat;
+	//private static readonly string ZoomPref = "ZoomPref";
+    /*public Slider zoomslider;
+    public float zoomfloat;*/
     public Slider senseslider;
     public float mousefloat;
 
@@ -33,18 +33,18 @@ public class CameraController : MonoBehaviour
 		
 		if(FirstPlayInt == 0)
 		{
-			zoomfloat = zoomAMT * 0.0001f;
-			zoomslider.value = zoomfloat;
+			/*zoomfloat = zoomAMT * 0.0001f;
+			zoomslider.value = zoomfloat;*/
             mousefloat = mouseSensitivity * 0.0001f;
 			senseslider.value = mousefloat;
-			PlayerPrefs.SetFloat(ZoomPref, zoomfloat);
+			//PlayerPrefs.SetFloat(ZoomPref, zoomfloat);
             PlayerPrefs.SetFloat(MousePref, mousefloat);
 			PlayerPrefs.SetInt(FirstPlay, -1);
 		}
 		else
 		{
-			zoomfloat = PlayerPrefs.GetFloat(ZoomPref, zoomslider.value);
-			zoomslider.value = zoomfloat;
+			/* zoomfloat = PlayerPrefs.GetFloat(ZoomPref, zoomslider.value);
+			zoomslider.value = zoomfloat;*/
             mousefloat = PlayerPrefs.GetFloat(MousePref, senseslider.value);
 			senseslider.value = mousefloat;
 		}
@@ -52,12 +52,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        maincamera.fieldOfView = zoomAMT;
-        
-        //realZoom = zoomAMT * 0.01f;
-        //realMouse = mouseSensitivity * 0.001f;
-        //PlayerPrefs.SetFloat(MousePref, realMouse);
-        //PlayerPrefs.SetFloat(ZoomPref, realZoom);
+        Camera.main.fieldOfView = zoomAMT;
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
@@ -70,12 +65,16 @@ public class CameraController : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
     }
 
-    public void sliderZoom( float zoom)
+    /*public void FOVSlider( float zoom)
     {
-        zoomAMT = zoom * 100f;
+        float max, min;
+        max = 120.0f;
+        min = 60.0f;
+        //This Slider changes the field of view of the Camera between the minimum and maximum values
+        zoomAMT = GUI.HorizontalSlider(new Rect(20, 20, 100, 40), zoomAMT, min, max);
     }
 
-    /*public void OnGUI()
+    public void OnGUI()
     {
         //Set up the maximum and minimum values the Slider can return (you can change these)
         float max, min;
