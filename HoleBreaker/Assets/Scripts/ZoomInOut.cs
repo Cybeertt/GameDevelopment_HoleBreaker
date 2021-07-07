@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ZoomInOut : MonoBehaviour
 {
-    /*Camera maincamera;
+    Camera maincamera;
     public float zoomAMT = 60f;
     // Start is called before the first frame update
     void Start()
@@ -21,9 +21,9 @@ public class ZoomInOut : MonoBehaviour
     public void sliderZoom( float zoom)
     {
         zoomAMT = zoom;
-    }*/
+    }
 
-    float m_FieldOfView;
+    /*float m_FieldOfView;
 
     void Start()
     {
@@ -41,10 +41,10 @@ public class ZoomInOut : MonoBehaviour
     {
         //Set up the maximum and minimum values the Slider can return (you can change these)
         float max, min;
-        max = 150.0f;
-        min = 20.0f;
+        max = 120.0f;
+        min = 60.0f;
         //This Slider changes the field of view of the Camera between the minimum and maximum values
         m_FieldOfView = GUI.HorizontalSlider(new Rect(20, 20, 100, 40), m_FieldOfView, min, max);
-    }
+    }*/
 
 }
