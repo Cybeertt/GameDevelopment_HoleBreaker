@@ -189,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5550737543231101550, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.455
+      value: 0.438
       objectReference: {fileID: 0}
     - target: {fileID: 5550737543231101550, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -224,6 +224,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5869015298714197459, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
+      propertyPath: zoomAMT
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869015298714197459, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
+      propertyPath: playerBody
+      value: 
+      objectReference: {fileID: 1906869701864544618}
+    - target: {fileID: 5869015298714197459, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
+      propertyPath: mouseSensitivity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269947459565616841, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: playerBody
       value: 
       objectReference: {fileID: 1906869701864544618}

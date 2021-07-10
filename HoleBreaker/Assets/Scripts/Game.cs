@@ -114,7 +114,7 @@ public class Game : MonoBehaviour
     Has a left sided bias
     */
     public void generateWall(int n) {
-        a3.text = "" + correctBlocks();
+//        a3.text = "" + correctBlocks();
 
         unfilledBlocks = new List<Vector3>();
         GameObject wall = Instantiate(wallPrefab, filledBlocks.transform.position, filledBlocks.transform.rotation);
@@ -127,6 +127,6 @@ public class Game : MonoBehaviour
         //Delete n random blocks
         //Stops at 10000 tries just in case
         makeHoles(10000, n);   
-        a1.text = "" + unfilledBlocks.Count;
+//        a1.text = "" + unfilledBlocks.Count;
     }
 }

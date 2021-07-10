@@ -11,11 +11,16 @@ public class UI:MonoBehaviour
     public GameObject mainmenu;
     public GameObject points;
     public bool activegame;
+    public bool play;
     public bool pause;
 
     public GameObject victory;
     public GameObject instruct;
     public GameObject instruct2;
+
+    public float FOV;
+    public float mouseSensitivity;
+    
 
     public int scoreAmount = 0;
 
@@ -36,28 +41,41 @@ public class UI:MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            if(activegame)
+        if(play == true) {
+            if(Input.GetKeyDown(KeyCode.P))
             {
-                ResumeGame();
-                
-            } 
-            else 
-            {
-                Cursor.lockState = CursorLockMode.None;
-                activegame = true;
-                pause = true;
-                instruct.SetActive(false);
-                pausemenu.SetActive(true);
-                Time.timeScale = 0f;   
-                Cursor.visible = true;
-            }
-        }  
+                if(activegame)
+                {
+                    ResumeGame();
+                    
+                } 
+                else 
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    activegame = true;
+                    pause = true;
+                    instruct.SetActive(false);
+                    pausemenu.SetActive(true);
+                    Time.timeScale = 0f;   
+                    Cursor.visible = true;
+                }
+            }  
 
-        if(Input.GetKey(KeyCode.T)){
-            restartCurrentLevel();
+            if(Input.GetKey(KeyCode.T)){
+                restartCurrentLevel();
+            }
         }
+        
+    }
+
+    public void PlayGame() {
+        play = true;
+    }
+
+    public void ExitGame() {
+        play = false;
+        activegame = false;
+        pause = false;
     }
 
     public void ResumeGame()
@@ -67,6 +85,7 @@ public class UI:MonoBehaviour
         pausemenu.SetActive(false);
         Time.timeScale = 1f;
         Cursor.visible = false;
+        pause = false;
         activelock();
     }
 

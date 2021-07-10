@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5550737543231101520}
   - component: {fileID: 5869015298714197459}
   - component: {fileID: 4161349801192060773}
+  - component: {fileID: 8269947459565616841}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -92,28 +93,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5550737543231101521}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1c0cd1d3f0be604fb42f08651d9d942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 442.85736
   playerBody: {fileID: 1906869701864544618, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
-  zoomAMT: 100
-  zoomslider: {fileID: 2689263914382781448, guid: 3bdec326e8ac42c429ce6a7ab2a2d662, type: 3}
-  zoomfloat: 0
-  senseslider: {fileID: 0}
-  mousefloat: 0
-  playerCamera: {fileID: 0}
-  buildableSurfacesLayer:
-    serializedVersion: 2
-    m_Bits: 384
-  blockTemplatePrefab: {fileID: 7543596943640782802, guid: 041e12796fd0c8b4aa901628b3bda0b9, type: 3}
-  blockPrefab: {fileID: 2979386524053626794, guid: c749342d7a5570842805bbb22b48d29f, type: 3}
-  templateMaterial: {fileID: 2100000, guid: fa31683cf21402f4abf52add887b5634, type: 2}
-  placedBlocks: {fileID: 5298938182308132725, guid: d353ee1bae0cef24f9f32649287e5111, type: 3}
-  start: {fileID: 3459199321873058416, guid: 17520fdeeb994e943a792be86050055d, type: 3}
-  end: {fileID: 5931165897596440391, guid: ce2a74316a6dd9f40ae9f52b7e25bb19, type: 3}
+  fov: 90
 --- !u!114 &4161349801192060773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,3 +114,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomAMT: 60
+--- !u!114 &8269947459565616841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5550737543231101521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013374cc1a11d27478a9615f7a6ced3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 0
+  playerBody: {fileID: 1906869701864544618, guid: d0ab92898ba6bb5428ed0ce1e105c45c, type: 3}
+  zoomAMT: 0
+  zoomslider: {fileID: 469763278479398079, guid: fffd6c48813e20c47b222c22841dbaab, type: 3}
+  zoomfloat: 0
+  senseslider: {fileID: 5359751779920195900, guid: d6c875b7d218e6e4a83a1cb4b4c41a83, type: 3}
+  mousefloat: 0

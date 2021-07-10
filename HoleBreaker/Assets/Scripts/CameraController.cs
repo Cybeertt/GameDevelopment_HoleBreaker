@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CameraController : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class CameraController : MonoBehaviour
     public Transform playerBody;
     private float xRotation = 0f;
     Camera maincamera;
-    public float zoomAMT;
+    public float FOV;
     private int FirstPlayInt;
     //public float realZoom;
     private static readonly string MousePref = "MousePref";
@@ -21,21 +22,25 @@ public class CameraController : MonoBehaviour
     public Slider senseslider;
     public float mousefloat;
 
+    public  TMP_Text MouseValue;
+    public  TMP_Text FOVValue;
+
+
     void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
         
         maincamera = GetComponent<Camera>(); 
-        zoomAMT = 90f;
+        FOV = 90f;
         mouseSensitivity = 400f;
 
         FirstPlayInt = PlayerPrefs.GetInt(FirstPlay);
 		
 		if(FirstPlayInt == 0)
 		{
-			zoomfloat = zoomAMT * 0.01f;
+			zoomfloat = 0.9f;
 			zoomslider.value = zoomfloat;
-            mousefloat = mouseSensitivity * 0.0001f;
+            mousefloat = 4.0f;
 			senseslider.value = mousefloat;
 			PlayerPrefs.SetFloat(ZoomPref, zoomfloat);
             PlayerPrefs.SetFloat(MousePref, mousefloat);
@@ -48,11 +53,12 @@ public class CameraController : MonoBehaviour
             mousefloat = PlayerPrefs.GetFloat(MousePref, senseslider.value);
 			senseslider.value = mousefloat;
 		}
+
     }
 
     void Update()
     {
-        Camera.main.fieldOfView = zoomAMT;
+        Camera.main.fieldOfView = FOV;
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
@@ -67,18 +73,18 @@ public class CameraController : MonoBehaviour
 
     public void FOVSlider(float zoom)
     {
-        zoomAMT = zoom * 100f;
+        FOV = zoom * 100f;
     }
 
-    /*public void ChangeMouseSensitivity()
+    public void textMouse()
     {
-        //Set up the maximum and minimum values the Slider can return (you can change these)
-        float max, min;
-        max = 150.0f;
-        min = 20.0f;
-        //This Slider changes the field of view of the Camera between the minimum and maximum values
-        zoomAMT = GUI.HorizontalSlider(new Rect(20, 20, 100, 40), zoomAMT, min, max);
-    }*/
+        MouseValue.text = string.Format("{0:F1}",mouseSensitivity/100f);
+    }
+
+    public void textFOV()
+    {
+        FOVValue.text = string.Format("{0:F1}",FOV);
+    }
 
     public void ChangeMouseSensitivity(float sense){
         mouseSensitivity = sense * 1000f;
