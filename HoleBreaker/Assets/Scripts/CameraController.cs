@@ -26,8 +26,8 @@ public class CameraController : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked;
         
         maincamera = GetComponent<Camera>(); 
-        zoomAMT = 100f;
-        mouseSensitivity = 100f;
+        zoomAMT = 90f;
+        mouseSensitivity = 400f;
 
         FirstPlayInt = PlayerPrefs.GetInt(FirstPlay);
 		

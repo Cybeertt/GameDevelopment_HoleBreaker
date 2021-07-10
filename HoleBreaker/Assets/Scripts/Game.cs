@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -11,9 +12,12 @@ public class Game : MonoBehaviour
 
     public GameObject wallPrefab;    
     public BlockSystem bSys;
-    private Vector3[] unfilledBlocks;
+    private List<Vector3> unfilledBlocks;
 
     public GameObject outerWall;
+
+    public TextMeshProUGUI a1, a3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,8 +63,9 @@ public class Game : MonoBehaviour
         while (i < iterations && count != n) {
             foreach (Transform t in filledBlocks.transform) {
                 if (UnityEngine.Random.Range(1, 6) == 1) {
+                    unfilledBlocks.Add(t.transform.position);
                     DestroyImmediate(t.gameObject);
-                    count++;
+                    count++;                    
                 } 
                 if (count == n) break;
             }
@@ -70,7 +75,7 @@ public class Game : MonoBehaviour
 
     //auxiliary method to generate walls to then make them into prefabs
     private void drawWall(int n) {
-        unfilledBlocks = new Vector3[n];
+        unfilledBlocks = new List<Vector3>();
         
         Vector3 wallStartPosition = filledBlocks.transform.position;
         int x = (int) Mathf.Round(wallStartPosition.x);
@@ -86,12 +91,32 @@ public class Game : MonoBehaviour
         }
     }
 
+    private int correctBlocks() {
+        int count = 0;
+        foreach (Transform b1 in placedBlocks.transform) 
+        {
+            foreach(Vector3 b2 in unfilledBlocks)
+            {
+                if (Mathf.Round(b1.position.y) == Mathf.Round(b2.y) && Mathf.Round(b1.position.z) == Mathf.Round(b2.z))
+                {
+                    count++;
+                    break;
+                }                
+            }
+        }
+
+        return count;
+    }
+
     //17, 1, 3
     /**
     Generates a random 7x4 wall given n holes to fill
     Has a left sided bias
     */
     public void generateWall(int n) {
+        a3.text = "" + correctBlocks();
+
+        unfilledBlocks = new List<Vector3>();
         GameObject wall = Instantiate(wallPrefab, filledBlocks.transform.position, filledBlocks.transform.rotation);
         Destroy(filledBlocks);
         clearPlayerWall();
@@ -101,6 +126,7 @@ public class Game : MonoBehaviour
 
         //Delete n random blocks
         //Stops at 10000 tries just in case
-        makeHoles(10000, n);        
+        makeHoles(10000, n);   
+        a1.text = "" + unfilledBlocks.Count;
     }
 }

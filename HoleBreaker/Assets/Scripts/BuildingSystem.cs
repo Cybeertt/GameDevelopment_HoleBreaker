@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BuildingSystem : MonoBehaviour
@@ -31,6 +32,8 @@ public class BuildingSystem : MonoBehaviour
     public GameObject placedBlocks;
     public Transform start, end;
     private Vector3 startPosition, endPosition;
+
+    public TextMeshProUGUI a1, a3;
 
     private float timePassed = 0f;
 
@@ -69,6 +72,7 @@ public class BuildingSystem : MonoBehaviour
                     Destroy(destroyPos.collider.gameObject);
                 }
             }
+            a1.text = "" + placedBlocks.transform.childCount;
         } else if (buildModeOn)
         {
             RaycastHit buildPosHit;
@@ -79,7 +83,6 @@ public class BuildingSystem : MonoBehaviour
                 buildPos = new Vector3(Mathf.Round(point.x), Mathf.Round(point.y), Mathf.Round(point.z));
                 canBuild = true;
 
-                //Isto é mesmo a melhor maneira de fazer isto??? Parece um pouco à bruta
                 if (isOutsideOfArea(point)) {
                     Destroy(currentTemplateBlock.gameObject);
                     canBuild = false;
@@ -122,8 +125,9 @@ public class BuildingSystem : MonoBehaviour
         Block tempBlock = bSys.allBlocks[0];
         newBlock.name = tempBlock.blockName + "-Block";
         newBlock.GetComponent<MeshRenderer>().material = tempBlock.blockMaterial;
+        a1.text = "" + placedBlocks.transform.childCount;
     }
-    
+    /*
     private void DestroyBlock(Vector3 point) 
     {
         Collider[] hitColliders = Physics.OverlapSphere(buildPos, 1f);
@@ -131,5 +135,5 @@ public class BuildingSystem : MonoBehaviour
         {
             hitCollider.SendMessage("Destroy");
         }
-    }
+    }*/
 }

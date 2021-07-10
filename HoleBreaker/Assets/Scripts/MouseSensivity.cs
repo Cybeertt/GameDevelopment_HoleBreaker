@@ -11,7 +11,7 @@ public class MouseSensivity : MonoBehaviour
 
     void Start()
     {
-        cameracontroller.mouseSensitivity = 100f;
+        cameracontroller.mouseSensitivity = 400f;
     }
 
     public void ChangeMouseSensitivity(){
