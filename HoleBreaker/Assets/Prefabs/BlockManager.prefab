@@ -70,6 +70,8 @@ MonoBehaviour:
   blockTemplatePrefab: {fileID: 7543596943640782802, guid: 041e12796fd0c8b4aa901628b3bda0b9, type: 3}
   blockPrefab: {fileID: 2979386524053626794, guid: c749342d7a5570842805bbb22b48d29f, type: 3}
   templateMaterial: {fileID: 2100000, guid: fa31683cf21402f4abf52add887b5634, type: 2}
-  placedBlocks: {fileID: 5298938182308132725, guid: d353ee1bae0cef24f9f32649287e5111, type: 3}
+  placedBlocks: {fileID: 4014071820818829627, guid: 35f92de1dead7a54e80780980596b9da, type: 3}
   start: {fileID: 3459199321873058416, guid: 17520fdeeb994e943a792be86050055d, type: 3}
   end: {fileID: 5931165897596440391, guid: ce2a74316a6dd9f40ae9f52b7e25bb19, type: 3}
+  a1: {fileID: 5392032953365822202, guid: e8bbf2b3dc6427d4c83ef91ee4c5f895, type: 3}
+  a3: {fileID: 0}

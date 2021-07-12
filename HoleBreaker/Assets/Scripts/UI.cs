@@ -20,9 +20,7 @@ public class UI:MonoBehaviour
 
     public float FOV;
     public float mouseSensitivity;
-    
 
-    public int scoreAmount = 0;
 
     //public  TMP_Text scoreAmountText;
 
@@ -35,7 +33,7 @@ public class UI:MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        changeLevel(0);
+        //changeLevel(0);
     }
 
     // Update is called once per frame
@@ -54,7 +52,7 @@ public class UI:MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                     activegame = true;
                     pause = true;
-                    instruct.SetActive(false);
+                    points.SetActive(false);
                     pausemenu.SetActive(true);
                     Time.timeScale = 0f;   
                     Cursor.visible = true;
@@ -81,7 +79,7 @@ public class UI:MonoBehaviour
     public void ResumeGame()
     {
         activegame = false;
-        instruct.SetActive(true);
+        points.SetActive(true);
         pausemenu.SetActive(false);
         Time.timeScale = 1f;
         Cursor.visible = false;

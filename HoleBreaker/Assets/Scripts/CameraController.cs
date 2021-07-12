@@ -22,6 +22,8 @@ public class CameraController : MonoBehaviour
     public Slider senseslider;
     public float mousefloat;
 
+    public bool play;
+
     public  TMP_Text MouseValue;
     public  TMP_Text FOVValue;
 
@@ -32,7 +34,7 @@ public class CameraController : MonoBehaviour
         
         maincamera = GetComponent<Camera>(); 
         FOV = 90f;
-        mouseSensitivity = 400f;
+        mouseSensitivity = 100f;
 
         FirstPlayInt = PlayerPrefs.GetInt(FirstPlay);
 		
@@ -40,7 +42,7 @@ public class CameraController : MonoBehaviour
 		{
 			zoomfloat = 0.9f;
 			zoomslider.value = zoomfloat;
-            mousefloat = 4.0f;
+            mousefloat = 1.0f;
 			senseslider.value = mousefloat;
 			PlayerPrefs.SetFloat(ZoomPref, zoomfloat);
             PlayerPrefs.SetFloat(MousePref, mousefloat);
@@ -58,17 +60,23 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        Camera.main.fieldOfView = FOV;
+        if(play == true) {
+            Camera.main.fieldOfView = FOV;
 
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-        playerBody.Rotate(Vector3.up * mouseX);
+            playerBody.Rotate(Vector3.up * mouseX);
+        }
+    }
+
+    public void PlayGame() {
+        play = true;
     }
 
     public void FOVSlider(float zoom)
