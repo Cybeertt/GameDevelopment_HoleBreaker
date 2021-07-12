@@ -7,7 +7,11 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
 
-    private static int PERFECT_WALL_BONUS = 1;
+    private const int PERFECT_WALL_BONUS = 1;
+    private int[] smallWallProgression = {3, 4, 4, 5, 5, 6, 6, 7, 8};
+    private int[] bigWallProgression = {10, 11, 12, 14, 15, 16, 18, 20, 22};
+
+
     public GameObject placedBlocks;
     public GameObject filledBlocks;
     public GameObject filledBlockPrefab;
@@ -16,26 +20,27 @@ public class Game : MonoBehaviour
     public BlockSystem bSys;
     private Dictionary<Vector3, bool> unfilledBlocks;
 
-
     public GameObject outerWall;
 
     public TextMeshProUGUI a1, a2, a3;
 
     private int totalScore = 0;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
         unfilledBlocks = new Dictionary<Vector3, bool>();
-        generateWall(10);
+        generateWall(3);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown("r")) {
-            finishWall(10);
-            generateWall(10);
+            finishWall(3);
+            generateWall(3);
         }
     }
 
@@ -73,65 +78,37 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void makeHoles(int iterations, int n) {
-        int count = 0;
-        int i = 0;
-        while (i < iterations && count != n) {
-            foreach (Transform t in filledBlocks.transform) {
-                if (UnityEngine.Random.Range(1, 6) == 1) {
-                    unfilledBlocks[t.position] = true;
-                    DestroyImmediate(t.gameObject);
-                    count++;                    
-                } else
-                {
-                    if (!unfilledBlocks.ContainsKey(t.position)) 
-                    {
-                        unfilledBlocks[t.position] = false;
-                    }
-                }
-                if (count == n) break;
-            }
-            i++;
-        }
-    }/*
-
-    //esta função gera paredes com n ou n-1 blocos POR ALGUMA RAZÃO ARRANJAR PLS
     private void makeHoles(int iterations, int n) 
     {
+        GameObject holes = new GameObject("holes");
+        
         int count = 0;
         int i = 0;
         while (i < iterations && count != n) 
         {
             foreach (Transform t in filledBlocks.transform) 
             {
-                if (UnityEngine.Random.Range(1, 6) == 1) 
-                {     
-                    //replaceOrAdd(unfilledBlocks, t.transform.position, true);
+                if (!t.IsChildOf(holes.transform) && UnityEngine.Random.Range(1, 6) == 1)
+                {
                     unfilledBlocks[t.position] = true;
-                    Destroy(t.gameObject);  
-                    count = 28 - filledBlocks.transform.childCount; 
-                    Debug.Log(count);            
-                } else
+                    t.SetParent(holes.transform);
+                    count++;
+                } else 
                 {
                     if (!unfilledBlocks.ContainsKey(t.position)) 
                     {
                         unfilledBlocks[t.position] = false;
                     }
-                        //unfilledBlocks.Add(t.position, false);
-                        
                 }
-                count = 28 - filledBlocks.transform.childCount; 
+                
+
                 if (count == n) break;
+
             }
             i++;
-            count = 28 - filledBlocks.transform.childCount; 
         }
-
-        if (28 - filledBlocks.transform.childCount != n)
-        {
-            makeHoles(iterations, 28 - filledBlocks.transform.childCount - n - 1);
-        }
-    }*/
+        Destroy(holes);
+    }
 
     //auxiliary method to generate walls to then make them into prefabs
     /*    private void drawWall(int n) 
