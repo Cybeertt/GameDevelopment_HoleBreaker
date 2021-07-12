@@ -11,6 +11,8 @@ public class Game : MonoBehaviour
     private int[] smallWallProgression = {3, 4, 4, 5, 5, 6, 6, 7, 8};
     private int[] bigWallProgression = {10, 11, 12, 14, 15, 16, 18, 20, 22};
 
+    private int progression = 0;
+
 
     public GameObject placedBlocks;
     public GameObject filledBlocks;
@@ -39,8 +41,17 @@ public class Game : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("r")) {
-            finishWall(3);
-            generateWall(3);
+            if (progression >= smallWallProgression.Length - 1)
+            {
+                finishWall(smallWallProgression[smallWallProgression.Length - 1]);
+                generateWall(smallWallProgression[smallWallProgression.Length - 1]);
+            } else
+            {
+                finishWall(smallWallProgression[progression++]);
+                generateWall(smallWallProgression[progression]);
+            }
+        
+            
         }
     }
 
@@ -78,6 +89,7 @@ public class Game : MonoBehaviour
         }
     }
 
+    //generates n random holes with a limit of n iterations in order for there to not be an infinite loop.
     private void makeHoles(int iterations, int n) 
     {
         GameObject holes = new GameObject("holes");
