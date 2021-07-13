@@ -29,6 +29,7 @@ public class Game : MonoBehaviour
 
     private int totalScore = 0;
 
+    private bool nextWallCooldown = false;
     
 
     // Start is called before the first frame update
@@ -41,7 +42,9 @@ public class Game : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("r")) {
+        if (Input.GetKeyDown("r") && nextWallCooldown == false) {
+            
+
             if (progression >= smallWallProgression.Length - 1)
             {
                 finishWall(smallWallProgression[smallWallProgression.Length - 1]);
@@ -51,7 +54,15 @@ public class Game : MonoBehaviour
                 finishWall(smallWallProgression[progression++]);
                 generateWall(smallWallProgression[progression]);
             }
+            
+            Invoke("ResetCoolDown", 1.0f);
+            nextWallCooldown = true;
         }
+    }
+
+    private void ResetCoolDown()
+    {
+        nextWallCooldown = false;
     }
 
     private void clearPlayerWall() {
@@ -228,6 +239,18 @@ public class Game : MonoBehaviour
         totalScore += getWallScore(n);
         a3.text = "" + totalScore;
 
+        unfilledBlocks.Clear();
+    }
+
+    public void reset() 
+    {
+        progression = 0;
+        a1.text = "0";
+        a2.text = "0";
+        a3.text = "0";
+
+        clearPlayerWall();
+        clearWall();
         unfilledBlocks.Clear();
     }
 }
