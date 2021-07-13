@@ -68,12 +68,17 @@ public class UI:MonoBehaviour
 
     public void PlayGame() {
         play = true;
+        mainmenu.SetActive(false);
+        points.SetActive(true);
+        activelock();
     }
 
     public void ExitGame() {
         play = false;
         activegame = false;
         pause = false;
+        mainmenu.SetActive(true);
+        points.SetActive(false);
     }
 
     public void ResumeGame()

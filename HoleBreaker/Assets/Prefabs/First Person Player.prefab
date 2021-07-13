@@ -45,8 +45,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 3.8
-  m_Radius: 0.6
+  m_Height: 1.5
+  m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1906869701864544597}
-  speed: 12
+  speed: 10
   speedMultiplier: 2
   verticalMultiplier: 2
 --- !u!1 &1906869703796969146
@@ -79,7 +79,6 @@ GameObject:
   - component: {fileID: 1906869703796969147}
   - component: {fileID: 1906869703796969150}
   - component: {fileID: 1906869703796969145}
-  - component: {fileID: 1906869703796969144}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -150,20 +149,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1906869703796969144
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1906869703796969146}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1001 &6304654128384767365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -189,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5550737543231101550, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.438
+      value: 0.506
       objectReference: {fileID: 0}
     - target: {fileID: 5550737543231101550, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -197,15 +182,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5550737543231101550, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.70047045
       objectReference: {fileID: 0}
     - target: {fileID: 5550737543231101550, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5550737543231101550, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7136814
       objectReference: {fileID: 0}
     - target: {fileID: 5550737543231101550, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: m_LocalRotation.z
@@ -217,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5550737543231101550, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 9091.07
       objectReference: {fileID: 0}
     - target: {fileID: 5550737543231101550, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -228,12 +213,20 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5869015298714197459, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869015298714197459, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: playerBody
       value: 
       objectReference: {fileID: 1906869701864544618}
     - target: {fileID: 5869015298714197459, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: mouseSensitivity
-      value: 100
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269947459565616841, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8269947459565616841, guid: 7ea7132141a441c4f8f3e247cace0dc5, type: 3}
       propertyPath: playerBody

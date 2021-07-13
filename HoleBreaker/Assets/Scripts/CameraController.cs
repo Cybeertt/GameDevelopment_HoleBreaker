@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
 		{
 			zoomfloat = 0.9f;
 			zoomslider.value = zoomfloat;
-            mousefloat = 1.0f;
+            mousefloat = 4.0f;
 			senseslider.value = mousefloat;
 			PlayerPrefs.SetFloat(ZoomPref, zoomfloat);
             PlayerPrefs.SetFloat(MousePref, mousefloat);
@@ -74,6 +74,10 @@ public class CameraController : MonoBehaviour
 
     public void PlayGame() {
         play = true;
+    }
+
+    public void ExitGame() {
+        play = false;
     }
 
     public void FOVSlider(float zoom)

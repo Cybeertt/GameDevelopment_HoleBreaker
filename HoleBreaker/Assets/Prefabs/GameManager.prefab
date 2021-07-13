@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980823204988370155}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.7108727, y: 0.8812566, z: 3.9033806}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.989127, y: 2.3812566, z: 3.9033806}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,11 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae789ed2ed6a294b9d2cd82873e358e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placedBlocks: {fileID: 4014071820818829627, guid: 35f92de1dead7a54e80780980596b9da, type: 3}
-  filledBlocks: {fileID: 2438761621921431951, guid: 2041f197583d2cd46ae413dab86ef9b5, type: 3}
+  placedBlocks: {fileID: 0}
+  filledBlocks: {fileID: 0}
   filledBlockPrefab: {fileID: 3895229301281237306, guid: 9c06f4c69d14cda47a287aa996a29dcc, type: 3}
   wallPrefab: {fileID: 1657282385548385126, guid: e9da8bebd3b4018489d7e7dc98cf2aa9, type: 3}
-  bSys: {fileID: 4304576723832858295, guid: e0366da4bcb41fa449eb284053231496, type: 3}
-  outerWall: {fileID: 7069381238108604203, guid: 7089ca447e2773749836a0447b0bfb27, type: 3}
-  a1: {fileID: 5392032953365822202, guid: e8bbf2b3dc6427d4c83ef91ee4c5f895, type: 3}
+  bSys: {fileID: 0}
+  outerWall: {fileID: 0}
+  a1: {fileID: 0}
+  a2: {fileID: 0}
   a3: {fileID: 0}
