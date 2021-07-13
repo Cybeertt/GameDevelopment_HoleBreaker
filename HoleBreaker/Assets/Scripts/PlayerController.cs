@@ -10,6 +10,31 @@ public class PlayerController : MonoBehaviour
     public float verticalMultiplier = 2.0f;
     private float currentSpeed;
     public bool move;
+    public int countdownTime;
+    public GameObject countdownDisplay;
+
+    void Start()
+    {
+        StartCoroutine(CountdownToStart());
+    }
+
+    IEnumerator CountdownToStart() 
+    {
+        while(countdownTime > 0) 
+        {
+            yield return new WaitForSeconds(1f);
+
+            countdownTime--;
+        }
+
+        countdownTime = 0;
+
+        yield return new  WaitForSeconds(0.1f);
+
+        countdownDisplay.SetActive(false);
+
+        MoveGame();
+    }
 
     void Update()
     {

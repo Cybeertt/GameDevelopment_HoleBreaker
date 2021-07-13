@@ -23,6 +23,7 @@ public class CameraController : MonoBehaviour
     public float mousefloat;
 
     public bool play;
+    public int countdownTime;
 
     public  TMP_Text MouseValue;
     public  TMP_Text FOVValue;
@@ -53,6 +54,24 @@ public class CameraController : MonoBehaviour
 			senseslider.value = mousefloat;
 		}
 
+        StartCoroutine(CountdownToStart());
+
+    }
+
+    IEnumerator CountdownToStart() 
+    {
+        while(countdownTime > 0) 
+        {
+            yield return new WaitForSeconds(1f);
+
+            countdownTime--;
+        }
+
+       countdownTime = 0;
+
+        yield return new  WaitForSeconds(0.1f);
+
+        PlayGame();
     }
 
     void Update()

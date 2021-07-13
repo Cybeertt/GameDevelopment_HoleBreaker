@@ -79,6 +79,7 @@ public class UI:MonoBehaviour
         pause = false;
         mainmenu.SetActive(true);
         points.SetActive(false);
+        pausemenu.SetActive(false);
     }
 
     public void ResumeGame()
