@@ -8,7 +8,8 @@ public class Game : MonoBehaviour
 {
 
     private const int PERFECT_WALL_BONUS = 1;
-    private int[] smallWallProgression = {3, 4, 4, 5, 5, 6, 6, 7, 8};
+    //private int[] smallWallProgression = {3, 4, 4, 5, 5, 6, 6, 7, 8};
+    private int[] smallWallProgression = {3, 4, 4, 5, 5, 6, 6, 7, 8, 8, 9, 9, 9, 10};
     private int[] bigWallProgression = {10, 11, 12, 14, 15, 16, 18, 20, 22};
 
     private int progression = 0;
@@ -50,8 +51,6 @@ public class Game : MonoBehaviour
                 finishWall(smallWallProgression[progression++]);
                 generateWall(smallWallProgression[progression]);
             }
-        
-            
         }
     }
 

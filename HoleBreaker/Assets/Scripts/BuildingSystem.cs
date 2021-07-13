@@ -53,13 +53,22 @@ public class BuildingSystem : MonoBehaviour
         return false;
     }
 
+    public void turnOnBuilding() {
+        buildModeOn = true;
+    }
+
+    public void turnOffBuilding() {
+        buildModeOn = false;
+    }
+
     private void Update()
     {
         timePassed += Time.deltaTime;
+        /*
         if (Input.GetKeyDown("e"))
         {
             buildModeOn = !buildModeOn;
-        }
+        }*/
 
         if (Input.GetMouseButton(1) && timePassed >= 0.065f)
         {
