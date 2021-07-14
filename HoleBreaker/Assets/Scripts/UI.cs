@@ -40,7 +40,7 @@ public class UI:MonoBehaviour
     void Update()
     {
         if(play == true) {
-            if(Input.GetKeyDown(KeyCode.P))
+            if(Input.GetKeyDown(KeyCode.Escape))
             {
                 if(activegame)
                 {
