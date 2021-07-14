@@ -17,10 +17,13 @@ public class InitialCountdown : MonoBehaviour
 
     public GameObject buildingManager;
 
+    public Game game;
+
     // Start is called before the first frame update
     void Start()
     {
         timerIsRunning = true;
+        game = GameObject.Find("GameManager").gameObject.GetComponent<Game>() ;
     }
 
     // Update is called once per frame
@@ -41,6 +44,8 @@ public class InitialCountdown : MonoBehaviour
                 timeRemaining = 0;
                 timerIsRunning = false;
             }
+        } else {
+            game.finishGame();
         }
     }
 

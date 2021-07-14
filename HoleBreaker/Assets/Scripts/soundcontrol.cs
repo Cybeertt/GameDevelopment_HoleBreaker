@@ -14,7 +14,8 @@ public class soundcontrol : MonoBehaviour
 	public AudioSource backgroundAudio;
 	public AudioSource[] soundEffectsAudio;
 	public AudioClip AudioClip1;
-    public AudioClip AudioClip2;
+  public AudioClip AudioClip2;
+	public AudioClip AudioClip3;
 	
     // Start is called before the first frame update
     void Start()
@@ -84,6 +85,30 @@ public class soundcontrol : MonoBehaviour
 	public void ChangeMusic2() 
 	{
 		if (backgroundAudio.clip == AudioClip2)
+		{
+
+			backgroundAudio.clip = AudioClip1;
+
+			backgroundAudio.Play();
+
+		} 
+	}
+
+	public void ChangeMusic3() 
+	{
+		if (backgroundAudio.clip == AudioClip2)
+		{
+
+			backgroundAudio.clip = AudioClip3;
+
+			backgroundAudio.Play();
+
+		} 
+	}
+
+	public void ChangeMusic4() 
+	{
+		if (backgroundAudio.clip == AudioClip3)
 		{
 
 			backgroundAudio.clip = AudioClip1;

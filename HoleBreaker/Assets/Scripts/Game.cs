@@ -25,20 +25,22 @@ public class Game : MonoBehaviour
 
     public GameObject outerWall;
 
-    public TextMeshProUGUI a1, a2, a3;
+    public TextMeshProUGUI a1, a2, a3, finalscore;
 
     private int totalScore = 0;
 
     private bool nextWallCooldown = false;
 
     private bool gameIsActive = false;
+
+     public UI ui;
     
 
     // Start is called before the first frame update
     void Start()
     {
         unfilledBlocks = new Dictionary<Vector3, bool>();
-        //generateWall(3);
+        ui = GameObject.Find("UI").gameObject.GetComponent<UI>() ;
     }
 
     // Update is called once per frame
@@ -267,5 +269,10 @@ public class Game : MonoBehaviour
     {
         gameIsActive = false;
         finishWall(progression);
+    }
+
+    public void finishGame() {
+        ui.ShowVictory();
+        finalscore.text = "" + totalScore;
     }
 }
