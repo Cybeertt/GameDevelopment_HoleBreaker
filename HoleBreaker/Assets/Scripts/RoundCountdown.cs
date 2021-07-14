@@ -7,7 +7,7 @@ public class RoundCountdown : MonoBehaviour
 {
 
     //private const int ROUND_TIME = 10;
-    public float timeRemaining = 120;
+    public float timeRemaining = 120; //A round of Hole Breaker is 2 minutes.
     public bool timerIsRunning = false;
     public TextMeshProUGUI countdownText;
 
@@ -32,8 +32,8 @@ public class RoundCountdown : MonoBehaviour
                 DisplayTime(timeRemaining);
             } else
             {
-                gameManager.GetComponent<Game>().startGame();
-                buildingManager.GetComponent<BuildingSystem>().turnOnBuilding();
+                gameManager.GetComponent<Game>().stopGame();
+                buildingManager.GetComponent<BuildingSystem>().turnOffBuilding();
                 countdownText.gameObject.SetActive(false);
                 timeRemaining = 0;
                 timerIsRunning = false;
@@ -48,11 +48,12 @@ public class RoundCountdown : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
-        countdownText.text = "" + seconds;
+        countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void resetTimer()
     {
-        DisplayTime(timeRemaining);
+        timeRemaining = 120;
+        timerIsRunning = true;
     }
 }

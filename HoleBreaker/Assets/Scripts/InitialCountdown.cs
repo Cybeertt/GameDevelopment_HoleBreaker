@@ -11,6 +11,8 @@ public class InitialCountdown : MonoBehaviour
     public bool timerIsRunning = false;
     public TextMeshProUGUI countdownText;
 
+    public GameObject roundCountdown;
+
     public GameObject gameManager;
 
     public GameObject buildingManager;
@@ -35,6 +37,7 @@ public class InitialCountdown : MonoBehaviour
                 gameManager.GetComponent<Game>().startGame();
                 buildingManager.GetComponent<BuildingSystem>().turnOnBuilding();
                 countdownText.gameObject.SetActive(false);
+                roundCountdown.SetActive(true);
                 timeRemaining = 0;
                 timerIsRunning = false;
             }
@@ -53,6 +56,7 @@ public class InitialCountdown : MonoBehaviour
 
     public void resetTimer()
     {
-        DisplayTime(timeRemaining);
+        timeRemaining = 3;
+        timerIsRunning = true;
     }
 }

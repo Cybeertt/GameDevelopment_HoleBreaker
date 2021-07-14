@@ -254,11 +254,18 @@ public class Game : MonoBehaviour
         clearPlayerWall();
         clearWall();
         unfilledBlocks.Clear();
+        gameIsActive = false;
     }
 
     public void startGame()
     {
         gameIsActive = true;
         generateWall(smallWallProgression[0]);
+    }
+
+    public void stopGame()
+    {
+        gameIsActive = false;
+        finishWall(progression);
     }
 }
