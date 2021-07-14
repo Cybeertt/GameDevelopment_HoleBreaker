@@ -33,8 +33,8 @@ public class Game : MonoBehaviour
 
     private bool gameIsActive = false;
 
-     public UI ui;
     
+    public UI ui;
 
     // Start is called before the first frame update
     void Start()

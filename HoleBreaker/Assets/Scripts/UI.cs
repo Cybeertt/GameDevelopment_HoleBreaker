@@ -90,9 +90,18 @@ public class UI:MonoBehaviour
         activegame = false;
         points.SetActive(true);
         pausemenu.SetActive(false);
+        victory.SetActive(false);
         Time.timeScale = 1f;
         Cursor.visible = false;
         pause = false;
+        activelock();
+    }
+
+    public void RestartGame()
+    {
+        play = true;
+        victory.SetActive(false);
+        Cursor.visible = false;
         activelock();
     }
 
@@ -145,6 +154,10 @@ public class UI:MonoBehaviour
     public void ShowVictory()
     {
         victory.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        activegame = true;
+        points.SetActive(false);
+        Cursor.visible = true;
         sc.ChangeMusic3();
     }
 
