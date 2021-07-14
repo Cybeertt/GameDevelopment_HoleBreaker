@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657922, g: 0.4964134, b: 0.57481974, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641383, b: 0.57481945, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3135,7 +3135,7 @@ GameObject:
   - component: {fileID: 597414227}
   - component: {fileID: 597414226}
   m_Layer: 0
-  m_Name: Block
+  m_Name: Destroy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5757,7 +5757,7 @@ GameObject:
   - component: {fileID: 1485710933}
   - component: {fileID: 1485710934}
   m_Layer: 0
-  m_Name: Break
+  m_Name: Place
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8029,6 +8029,14 @@ PrefabInstance:
       propertyPath: start
       value: 
       objectReference: {fileID: 2082681439}
+    - target: {fileID: 4304576723832858294, guid: e0366da4bcb41fa449eb284053231496, type: 3}
+      propertyPath: placing
+      value: 
+      objectReference: {fileID: 1485710932}
+    - target: {fileID: 4304576723832858294, guid: e0366da4bcb41fa449eb284053231496, type: 3}
+      propertyPath: destroying
+      value: 
+      objectReference: {fileID: 597414224}
     - target: {fileID: 4304576723832858294, guid: e0366da4bcb41fa449eb284053231496, type: 3}
       propertyPath: blockPrefab
       value: 

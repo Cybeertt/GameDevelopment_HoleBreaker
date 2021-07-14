@@ -34,6 +34,8 @@ public class BuildingSystem : MonoBehaviour
     public Transform start, end;
     private Vector3 startPosition, endPosition;
 
+    public GameObject placing, destroying;
+
     //public TextMeshProUGUI a1, a3;
 
     private float timePassed = 0f;
@@ -76,6 +78,7 @@ public class BuildingSystem : MonoBehaviour
                 if (destroyPos.collider.gameObject.layer == 8)
                 {
                     Destroy(destroyPos.collider.gameObject);
+                    destroying.GetComponent<AudioSource>().Play();
                 }
             }
 
@@ -128,6 +131,7 @@ public class BuildingSystem : MonoBehaviour
 
     private void PlaceBlock()
     {
+        placing.GetComponent<AudioSource>().Play();
         GameObject newBlock = Instantiate(blockPrefab, buildPos, Quaternion.identity);
         newBlock.transform.parent = placedBlocks.transform;
         Block tempBlock = bSys.allBlocks[0];
