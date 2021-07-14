@@ -30,10 +30,12 @@ public class UI:MonoBehaviour
 
     private int currentLevelId;
 
+    public soundcontrol sc;
+
     // Start is called before the first frame update
     void Start()
     {
-        //changeLevel(0);
+        sc = GameObject.Find("Soundmanager").gameObject.GetComponent<soundcontrol>() ;
     }
 
     // Update is called once per frame
@@ -80,6 +82,7 @@ public class UI:MonoBehaviour
         mainmenu.SetActive(true);
         points.SetActive(false);
         pausemenu.SetActive(false);
+        victory.SetActive(false);
     }
 
     public void ResumeGame()
@@ -142,7 +145,7 @@ public class UI:MonoBehaviour
     public void ShowVictory()
     {
         victory.SetActive(true);
-        //NextLevel();
+        sc.ChangeMusic3();
     }
 
     public void activelock()
