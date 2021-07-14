@@ -31,7 +31,6 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
         
         maincamera = GetComponent<Camera>(); 
         FirstPlayInt = PlayerPrefs.GetInt(FirstPlay);
@@ -54,24 +53,6 @@ public class CameraController : MonoBehaviour
 			senseslider.value = mousefloat;
 		}
 
-        StartCoroutine(CountdownToStart());
-
-    }
-
-    IEnumerator CountdownToStart() 
-    {
-        while(countdownTime > 0) 
-        {
-            yield return new WaitForSeconds(1f);
-
-            countdownTime--;
-        }
-
-       countdownTime = 0;
-
-        yield return new  WaitForSeconds(0.1f);
-
-        PlayGame();
     }
 
     void Update()

@@ -1,50 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class Countdown : MonoBehaviour
 {
-    private const int ROUND_TIME = 10;
-    public float timeRemaining = ROUND_TIME;
-    public bool timerIsRunning = false;
-    public TextMeshProUGUI countdownText;
+
+    public int countdownTime;
+    public Text countdownDisplay;
+
     // Start is called before the first frame update
     void Start()
     {
-        timerIsRunning = true;
+        StartCoroutine(CountdownToStart());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator CountdownToStart() 
     {
-        if (timerIsRunning)
+        while(countdownTime > 0) 
         {
-            if (timeRemaining > 0)
-            {
-                timeRemaining -= Time.deltaTime;
-                DisplayTime(timeRemaining);
-            } else
-            {
-                //Finish the round
-                timeRemaining = 0;
-                timerIsRunning = false;
-            }
+            countdownDisplay.text = countdownTime.ToString();
+
+            yield return new WaitForSeconds(1f);
+
+            countdownTime--;
         }
-    }
 
-    void DisplayTime(float timeToDisplay)
-    {
-        timeToDisplay += 1;
+        countdownDisplay.text = "Go!";
 
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        yield return new  WaitForSeconds(0.1f);
 
-        countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
-
-    public void resetTimer()
-    {
-        DisplayTime(ROUND_TIME);
+        countdownDisplay.gameObject.SetActive(false);
     }
 }
