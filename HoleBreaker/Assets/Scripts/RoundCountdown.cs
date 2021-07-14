@@ -7,7 +7,7 @@ public class RoundCountdown : MonoBehaviour
 {
 
     //private const int ROUND_TIME = 10;
-    public float timeRemaining = 3;
+    public float timeRemaining = 120;
     public bool timerIsRunning = false;
     public TextMeshProUGUI countdownText;
 
