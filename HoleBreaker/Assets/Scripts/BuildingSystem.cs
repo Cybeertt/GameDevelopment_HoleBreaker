@@ -41,7 +41,7 @@ public class BuildingSystem : MonoBehaviour
     private void Start()
     {
         bSys = GetComponent<BlockSystem>();
-        sc = GameObject.Find("Soundmanager").gameObject.GetComponent<Soundcontrol>() ;
+        //sc = GameObject.Find("Soundmanager").gameObject.GetComponent<Soundcontrol>() ;
         currentTemplateBlock = Instantiate(blockTemplatePrefab, new Vector3(-10, -1000, -10), Quaternion.identity);
         startPosition = start.position;
         endPosition = end.position;
