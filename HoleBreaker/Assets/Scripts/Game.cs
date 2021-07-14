@@ -30,19 +30,21 @@ public class Game : MonoBehaviour
     private int totalScore = 0;
 
     private bool nextWallCooldown = false;
+
+    private bool gameIsActive = false;
     
 
     // Start is called before the first frame update
     void Start()
     {
         unfilledBlocks = new Dictionary<Vector3, bool>();
-        generateWall(3);
+        //generateWall(3);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("r") && nextWallCooldown == false) {
+        if (gameIsActive && Input.GetKeyDown("r") && nextWallCooldown == false) {
             
 
             if (progression >= smallWallProgression.Length - 1)
@@ -252,5 +254,11 @@ public class Game : MonoBehaviour
         clearPlayerWall();
         clearWall();
         unfilledBlocks.Clear();
+    }
+
+    public void startGame()
+    {
+        gameIsActive = true;
+        generateWall(smallWallProgression[0]);
     }
 }

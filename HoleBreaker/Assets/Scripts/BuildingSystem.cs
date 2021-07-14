@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BuildingSystem : MonoBehaviour
 {
@@ -37,31 +36,9 @@ public class BuildingSystem : MonoBehaviour
     //public TextMeshProUGUI a1, a3;
 
     private float timePassed = 0f;
-    public int countdownTime;
 
-    private Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>();
-
-    public Text build, destroy;
-
-    private GameObject currentKey;
-
-    private Color32 normal = new Color32(39, 171, 249, 255);
-    private Color32 selected = new Color32(239, 116, 36, 255);
-
-    KeyCode[] mouseKeys;
-    void Awake()
+    private void Start()
     {
-        mouseKeys = new KeyCode[] { KeyCode.Mouse0, KeyCode.Mouse1, KeyCode.Mouse2, KeyCode.Mouse3, KeyCode.Mouse4, KeyCode.Mouse5, KeyCode.Mouse6 };
-    }
-
-    void Start()
-    {
-        keys.Add("Build", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Build", "Mouse0")));
-        keys.Add("Destroy", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Destroy", "Mouse1")));
-
-        build.text = keys["Build"].ToString();
-        destroy.text = keys["Destroy"].ToString();
-
         bSys = GetComponent<BlockSystem>();
         currentTemplateBlock = Instantiate(blockTemplatePrefab, new Vector3(-10, -1000, -10), Quaternion.identity);
         startPosition = start.position;
@@ -78,7 +55,6 @@ public class BuildingSystem : MonoBehaviour
 
     public void turnOnBuilding() {
         buildModeOn = true;
-        countdownTime = 5;
     }
 
     public void turnOffBuilding() {
@@ -87,25 +63,14 @@ public class BuildingSystem : MonoBehaviour
 
     private void Update()
     {
+        timePassed += Time.deltaTime;
         
-        /*if (Input.GetKeyDown("e"))
+        if (Input.GetKeyDown("e"))
         {
             buildModeOn = !buildModeOn;
-        }*/
-
-        /*while(countdownTime > 0) 
-        {
-
-            yield return new WaitForSeconds(1f);
-
-            countdownTime--;
         }
 
-        yield return new  WaitForSeconds(0.1f);*/
-
-        timePassed += Time.deltaTime;
-
-        if (Input.GetKey(keys["Destroy"]) && timePassed >= 0.065f)
+        if (Input.GetMouseButton(1) && timePassed >= 0.065f)
         {
             timePassed = 0f;
             RaycastHit destroyPos;
@@ -155,7 +120,7 @@ public class BuildingSystem : MonoBehaviour
         {
             currentTemplateBlock.transform.position = buildPos;
 
-            if (Input.GetKey(keys["Build"]))
+            if (Input.GetMouseButtonDown(0))
             {
                 PlaceBlock();
             }
@@ -180,58 +145,4 @@ public class BuildingSystem : MonoBehaviour
             hitCollider.SendMessage("Destroy");
         }
     }*/
-
-
-    void OnGUI()
-    {
-        
-        if (currentKey != null)
-        {
-            Event e = Event.current;
-
-            if (e.isKey)
-            {
-                keys[currentKey.name] = e.keyCode;
-                currentKey.transform.GetChild(0).GetComponent<Text>().text = e.keyCode.ToString();
-                currentKey.GetComponent<Image>().color = normal;
-                currentKey = null;
-            } 
-            //Prevent duplicate keys
-            if (e.isMouse)
-            {
-                for (int i = 0; i < mouseKeys.Length; ++i)
-                {
-                    if (Input.GetKeyDown(mouseKeys[i]))
-                    {
-                        keys[currentKey.name] = mouseKeys[i];
-                        currentKey.transform.GetChild(0).GetComponent<Text>().text = mouseKeys[i].ToString();
-                        currentKey.GetComponent<Image>().color = normal;
-                        currentKey = null;
-                    }
-                }
-            } 
-        }
-    }
-
-    public void ChangeKey(GameObject clicked)
-    {
-        if (currentKey != null)
-        {
-            currentKey.GetComponent<Image>().color = normal;
-        }
-
-        currentKey = clicked;
-        currentKey.GetComponent<Image>().color = selected;
-    }
-
-    public void SaveKeys()
-    {
-        foreach (var key in keys)
-        {
-            PlayerPrefs.SetString(key.Key, key.Value.ToString());
-            Debug.Log(key.Value);
-        }
-
-        PlayerPrefs.Save();
-    }
 }
