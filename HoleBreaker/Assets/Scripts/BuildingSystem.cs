@@ -13,6 +13,7 @@ public class BuildingSystem : MonoBehaviour
     private bool canBuild = false;
 
     private BlockSystem bSys;
+    private soundcontrol sc;
 
     [SerializeField]
     private LayerMask buildableSurfacesLayer;
@@ -40,6 +41,7 @@ public class BuildingSystem : MonoBehaviour
     private void Start()
     {
         bSys = GetComponent<BlockSystem>();
+        sc = GameObject.Find("Soundmanager").gameObject.GetComponent<Soundcontrol>() ;
         currentTemplateBlock = Instantiate(blockTemplatePrefab, new Vector3(-10, -1000, -10), Quaternion.identity);
         startPosition = start.position;
         endPosition = end.position;
@@ -76,6 +78,8 @@ public class BuildingSystem : MonoBehaviour
                     Destroy(destroyPos.collider.gameObject);
                 }
             }
+
+
             //a1.text = "" + placedBlocks.transform.childCount;
         } else if (buildModeOn)
         {
