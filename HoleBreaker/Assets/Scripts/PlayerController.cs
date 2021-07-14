@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     public float verticalMultiplier = 2.0f;
     private float currentSpeed;
     public bool move;
-    public int countdownTime;
 
     void Update()
     {
